@@ -509,8 +509,13 @@ def discover_and_import_weather_markets(log=print):
                 results = client.list_importable_markets(
                     category = term, min_volume=0, limit=20
                 )
+                time.sleep(2)
             except Exception as e:
-                log(f"  Discovery search failed for '{term}': {e}")
+                if "timeout" in str(e).lower():
+                    log(f"  ⏳ Server chậm, nghỉ 5s rồi tiếp tục...")
+                    time.sleep(5)
+                else:
+                    log(f"  Discovery search failed for '{term}': {e}")
                 continue
 
             for m in results:
