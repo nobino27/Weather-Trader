@@ -478,12 +478,14 @@ def detect_price_trend(history: list) -> dict:
 
 # Search terms per location (matching Polymarket event naming)
 LOCATION_SEARCH_TERMS = {
-    "NYC": ["temperature new york", "temperature nyc"],
-    "Chicago": ["temperature chicago"],
-    "Seattle": ["temperature seattle"],
-    "Atlanta": ["temperature atlanta"],
-    "Dallas": ["temperature dallas"],
-    "Miami": ["temperature miami"],
+    "NYC": ["temperature new york", "temperature nyc", "Central Park temperature", "NYC temp"],
+    "Chicago": ["temperature chicago", "Chicago O'Hare", "Chicago temp"],
+    "Seattle": ["temperature seattle", "Seattle-Tacoma", "SeaTac temperature"],
+    "Atlanta": ["temperature atlanta", "Atlanta Hartsfield", "ATL temperature"],
+    "Dallas": ["temperature dallas", "Dallas-Fort Worth", "DFW temperature"],
+    "Miami": ["temperature miami", "Miami Intl", "Miami temp"],
+    "Los Angeles": ["temperature los angeles", "LAX temperature"],
+    "London": ["temperature london", "Heathrow temperature"],
 }
 
 
@@ -505,7 +507,7 @@ def discover_and_import_weather_markets(log=print):
         for term in search_terms:
             try:
                 results = client.list_importable_markets(
-                    q=term, venue="polymarket", min_volume=0, limit=20
+                    query=term, venue="polymarket", min_volume=0, limit=20
                 )
             except Exception as e:
                 log(f"  Discovery search failed for '{term}': {e}")
