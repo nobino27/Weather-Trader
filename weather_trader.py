@@ -508,7 +508,7 @@ def discover_and_import_weather_markets(log=print):
         for term in search_terms:
             try:
                 results = client.list_importable_markets(
-                    q = term, venue = "polymarket", min_volume=0, limit=20
+                    0, 20, None, "polymarket", term
                 )
                 time.sleep(2)
             except Exception as e:
