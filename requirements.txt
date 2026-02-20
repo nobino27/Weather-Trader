@@ -1,0 +1,3 @@
+eth-account
+simmer-sdk
+py-clob-client
